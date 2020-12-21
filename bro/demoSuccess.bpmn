@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1w3p7ub" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <bpmn:collaboration id="Collaboration_0ky90p9">
+    <bpmn:participant id="Participant_0a8hq83" name="Goods Inventoring" processRef="Process_08yg2ik" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_08yg2ik" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Request Received">
+      <bpmn:outgoing>Flow_14l8zbp</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_028iuut" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_1aqqzi9" name="Check Goods">
+      <bpmn:incoming>Flow_14l8zbp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qwspt9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_12ly0po" name="Inventory Completed">
+      <bpmn:incoming>Flow_0fxy5ga</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Activity_0jr401e" name="Recheck Disparity Code">
+      <bpmn:incoming>Flow_093xro9</bpmn:incoming>
+      <bpmn:outgoing>Flow_16a2jcp</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_1wjxusb" name="Create Checking Report">
+      <bpmn:incoming>Flow_1bg3fm2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fxy5ga</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0t94jmn" name="Disparity Confirmed">
+      <bpmn:incoming>Flow_16a2jcp</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bg3fm2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_14l8zbp" sourceRef="StartEvent_1" targetRef="Activity_1aqqzi9" />
+    <bpmn:sequenceFlow id="Flow_0qwspt9" sourceRef="Activity_1aqqzi9" targetRef="Activity_166tndx" />
+    <bpmn:sequenceFlow id="Flow_093xro9" sourceRef="Activity_166tndx" targetRef="Activity_0jr401e" />
+    <bpmn:sequenceFlow id="Flow_16a2jcp" sourceRef="Activity_0jr401e" targetRef="Activity_0t94jmn" />
+    <bpmn:sequenceFlow id="Flow_1bg3fm2" sourceRef="Activity_0t94jmn" targetRef="Activity_1wjxusb" />
+    <bpmn:sequenceFlow id="Flow_0fxy5ga" sourceRef="Activity_1wjxusb" targetRef="Event_12ly0po" />
+    <bpmn:userTask id="Activity_166tndx" name="Gather Check Notes">
+      <bpmn:incoming>Flow_0qwspt9</bpmn:incoming>
+      <bpmn:outgoing>Flow_093xro9</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0ky90p9">
+      <bpmndi:BPMNShape id="Participant_0a8hq83_di" bpmnElement="Participant_0a8hq83" isHorizontal="true">
+        <dc:Bounds x="160" y="70" width="1300" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0fxy5ga_di" bpmnElement="Flow_0fxy5ga">
+        <di:waypoint x="1280" y="200" />
+        <di:waypoint x="1392" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bg3fm2_di" bpmnElement="Flow_1bg3fm2">
+        <di:waypoint x="1050" y="200" />
+        <di:waypoint x="1180" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16a2jcp_di" bpmnElement="Flow_16a2jcp">
+        <di:waypoint x="830" y="200" />
+        <di:waypoint x="950" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_093xro9_di" bpmnElement="Flow_093xro9">
+        <di:waypoint x="620" y="200" />
+        <di:waypoint x="730" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qwspt9_di" bpmnElement="Flow_0qwspt9">
+        <di:waypoint x="430" y="200" />
+        <di:waypoint x="520" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14l8zbp_di" bpmnElement="Flow_14l8zbp">
+        <di:waypoint x="246" y="200" />
+        <di:waypoint x="330" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0khle20_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="210" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="205" y="225" width="47" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ryvga4_di" bpmnElement="Activity_1aqqzi9">
+        <dc:Bounds x="330" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12ly0po_di" bpmnElement="Event_12ly0po">
+        <dc:Bounds x="1392" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1383" y="225" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pt7zfv_di" bpmnElement="Activity_0jr401e">
+        <dc:Bounds x="730" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1v7skiv_di" bpmnElement="Activity_1wjxusb">
+        <dc:Bounds x="1180" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13wk9cc_di" bpmnElement="Activity_0t94jmn">
+        <dc:Bounds x="950" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0oksrlb_di" bpmnElement="Activity_166tndx">
+        <dc:Bounds x="520" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
